@@ -4,7 +4,8 @@
 
 using namespace std;
 
-typedef struct dados{
+//typedef 
+struct dados{
     string nome, endereco;
     int idade;
 };

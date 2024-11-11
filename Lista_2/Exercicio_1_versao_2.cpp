@@ -13,11 +13,14 @@ int main() {
 
     Dados cadastro;
 
+    cout << "Nome: ";
     getline(cin, cadastro.nome);
+    cout << "Idade: ";
     cin >> cadastro.idade;
     std::cin.ignore();
+    cout << "Endereço: ";
     getline(cin, cadastro.endereco);
-    cout << cadastro.nome << " mora no endereço: " << cadastro.endereco << " e tem " << cadastro.idade  << " de idade. " << endl <<"\n";
+    cout << cadastro.nome << " mora no endereço: " << cadastro.endereco <<"." << " Idade: " << cadastro.idade  << " anos. " << endl <<"\n";
 
 return 0;
 }
