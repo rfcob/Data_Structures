@@ -35,6 +35,7 @@ int inteseccao(int conjunto1[], int conjunto2[], int tamanho1, int tamanho2){
             if (conjunto1[i]==conjunto2[j]){
                 //valor=conjunto1[i];
                 tamanho+=1;
+                break;
             }
         }
     }
@@ -52,6 +53,8 @@ int inteseccao(int conjunto1[], int conjunto2[], int tamanho1, int tamanho2){
     }
 
     return imprime(interseccao,tamanho,nome="inteseccao");
+
+    
 
     return 0;
 }
