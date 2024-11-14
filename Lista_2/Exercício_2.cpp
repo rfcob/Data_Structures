@@ -1,3 +1,5 @@
+//Questão 2.  Escreva uma função iterativa para decidir se uma matriz é simétrica.
+
 #include <iostream>
 using namespace std;
 
