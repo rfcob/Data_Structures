@@ -39,7 +39,8 @@ int main(){
 
     exibirLista(lista);
     printf("Numero de elementos na lista: %i.\n", tamanho(lista));
-    printf("Tamanho da lista (em bytes): %i.\n", (sizeof(LISTA) / sizeof(REGISTRO))-2);
+    printf("Tamanho da lista (em bytes): %i.\n", tamanhoEmBytes(lista));
+    printf("Tamanho da lista (em bytes): %i.\n", ((sizeof(LISTA) -8)- (tamanho_lista*4))); //Calculando o tamanho restante da lista supondo o alinhamento de 8bytes para o processador.
 
 
     return 0;

@@ -3,8 +3,8 @@
 #define LISTA_SEQUENCIAL_ORDENADA_H
 
 #include <stdio.h>
-//#define MAX 50
-#define MAX 10
+#define MAX 50
+//#define MAX 10
 #define ERRO -1
 #define bool int
 #define true 1
