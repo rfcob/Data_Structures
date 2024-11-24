@@ -3,18 +3,27 @@
 #include "ListaOrdenada.h"
 #include "ListaOrdenada.c"
 
-int resize_array(LISTA* lista, int tamanho_lista){
 
-    int tl=sizeof(LISTA);
+/* int resize_array(LISTA* lista, int tamanho_lista){
 
-    if(tamanho_lista<= tl/2){
-        return tamanho_lista;
-    }else{
-        lista = (LISTA *) realloc(lista,2* sizeof(LISTA));
+    if(tamanho_lista == MAX) {
+        LISTA* lista = (LISTA *) realloc(lista,2* sizeof(LISTA));
     }
+    return lista;
+} */
 
-}//precisa-se testar quantos elementos tem na lista e quantos cabem ainda. Assim, podemos criar condicionais ou usar um contador que parte do valor da lista. quando 
-//chegar a zero, resize a lista 
+int resize_array(LISTA** lista, int tamanho_lista) {
+    if (tamanho_lista >= MAX) { // Usar operador de igualdade '=='
+        LISTA *temp = (LISTA*)realloc(*lista, ((MAX*2) * sizeof(LISTA)));
+        if (temp == NULL) {
+            printf("Erro ao alocar memória\n");
+            return ERRO; // Indicador de erro
+        }
+        *lista=temp;
+    }
+    return 0; // Indicador de sucesso
+}
+
 
 int main(){
 
@@ -29,10 +38,10 @@ int main(){
     printf("Digite a quantidade de itens a inserir:\n");
     scanf("%d", &tamanho_lista);
     
-    resize_array(lista, tamanho_lista);
+    resize_array(&lista, tamanho_lista);
 
     for(int i=0; i<tamanho_lista;i++){
-                printf("Digite o valor: ", i);
+        printf("Digite o valor: ", i);
         scanf("%d", &reg.chave);
         inserirElemListaOrd(lista, reg);
     }
@@ -40,8 +49,9 @@ int main(){
     exibirLista(lista);
     printf("Numero de elementos na lista: %i.\n", tamanho(lista));
     printf("Tamanho da lista (em bytes): %i.\n", tamanhoEmBytes(lista));
-    printf("Tamanho da lista (em bytes): %i.\n", ((sizeof(LISTA) -8)- (tamanho_lista*4))); //Calculando o tamanho restante da lista supondo o alinhamento de 8bytes para o processador.
+ //   printf("Tamanho da lista (em bytes): %i.\n", ((sizeof(LISTA) -8)- (tamanho_lista*4))); //Calculando o tamanho restante da lista supondo o alinhamento de 8bytes para o processador.
 
 
+    free(lista);
     return 0;
 }
