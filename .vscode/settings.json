@@ -3,6 +3,8 @@
         "iostream": "cpp",
         "ostream": "cpp",
         "stdlib.h": "c",
-        "listaordenada.h": "c"
+        "listaordenada.h": "c",
+        "stdio.h": "c",
+        "teste": "cpp"
     }
 }

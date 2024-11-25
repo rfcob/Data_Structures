@@ -28,8 +28,7 @@ int tamanho(LISTA* l) {
    porque teremos as mesmas funcoes para listas ligadas.   
 */
 int tamanhoEmBytes(LISTA* l) {
-  return l->nroElem * sizeof(REGISTRO);
-  // return sizeof(LISTA);
+   return sizeof(LISTA);
 } /* tamanhoEmBytes */
 
 /* Retornar a chave do primeiro elemento da lista sequencial (caso haja) e ERRO

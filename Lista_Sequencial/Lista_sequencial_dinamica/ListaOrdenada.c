@@ -2,35 +2,58 @@
 #include "ListaOrdenada.h"
 
 
-/* Inicialização da lista sequencial (a lista já está criada e é apontada pelo endereço em l) */
-void inicializarLista(LISTA* l){
-  l->nroElem = 0;
-} /* inicializarLista */
+// Inicialização da lista sequencial dinâmica (apontada pelo endereço em l)_____
 
-/* Exibição da lista sequencial */
-void exibirLista(LISTA* l){
-  int i;
-  printf("Lista: \" ");
-  for (i=0; i < l->nroElem; i++)
-    printf("%i ", l->A[i].chave);
-  printf("\"\n");
-  
-} /* exibirLista */ 
+  void inicializarLista(LISTA* l){
+      l->A = (REGISTRO*)malloc(MAX * sizeof(REGISTRO));
 
-/* Retornar o tamanho da lista (numero de elementos "validos") */
-int tamanho(LISTA* l) {
-  return l->nroElem;
-} /* tamanho */
+      if (l->A == NULL) {
+      printf("Erro ao alocar memória\n");
+      exit(1);
+      }
 
-/* Retornar o tamanho em bytes da lista. Neste caso, isto nao depende do numero
-   de elementos que estao sendo usados, pois a alocacao de memoria eh estatica.
-   A priori, nao precisariamos do ponteiro para a lista, vamos utiliza-lo apenas
-   porque teremos as mesmas funcoes para listas ligadas.   
-*/
-int tamanhoEmBytes(LISTA* l) {
-  return l->nroElem * sizeof(REGISTRO);
-  // return sizeof(LISTA);
-} /* tamanhoEmBytes */
+      l->nroElem = 0;
+      l->alocacao = MAX; 
+  }
+
+//Realocar espaço caso necessário________________________________________________
+  void realocLista(LISTA *l) {
+
+    l->alocacao *= 2;
+
+    l->A = (REGISTRO*) realloc(l->A, l->alocacao * sizeof(REGISTRO));
+
+    if (l->A == NULL){
+      printf("Erro ao alocar memória\n");
+      exit(1);
+  }
+
+}
+
+// Exibir________________________________________________________________________
+
+  void exibirLista(LISTA* l){
+      printf("Lista: \" ");
+
+      for (int i=0; i < l->nroElem; i++){
+        printf("%i ", l->A[i].chave);
+      }
+      printf("\"\n");
+  } 
+
+// Retornar o tamanho da lista (numero de elementos "validos")___________________
+
+  int tamanho(LISTA* l){
+    return l->nroElem;
+  } 
+
+
+//* Retornar o tamanho da lista em bytes_________________________________________ 
+  int tamanhoEmBytes(LISTA* l) {
+    return l->nroElem * sizeof(REGISTRO);
+  } 
+
+
 
 /* Retornar a chave do primeiro elemento da lista sequencial (caso haja) e ERRO
    caso a lista esteja vazia */
@@ -129,7 +152,7 @@ bool excluirElemListaOrd(LISTA* l, TIPOCHAVE ch) {
 
 
 /* Inserção em lista ordenada usando busca binária permitindo duplicação */
-bool inserirElemListaOrd(LISTA* l, REGISTRO reg) {
+/*bool inserirElemListaOrd(LISTA* l, REGISTRO reg) {
   if(l->nroElem >= MAX) return false; // lista cheia
   int pos = l->nroElem;
   while(pos > 0 && l->A[pos-1].chave > reg.chave) {
@@ -140,6 +163,23 @@ bool inserirElemListaOrd(LISTA* l, REGISTRO reg) {
   l->nroElem++;
   return true;
 } /* inserirElemListaOrd */
+
+bool inserirElemListaOrd(LISTA* l, REGISTRO reg) {
+    // Verificar se é necessário realocar a lista
+    if (l->nroElem >= l->alocacao) {
+        realocLista(l); // Realoca a lista se atingir a capacidade
+    }
+
+    int pos = l->nroElem;
+    while (pos > 0 && l->A[pos - 1].chave > reg.chave) {
+        l->A[pos] = l->A[pos - 1];
+        pos--;
+    }
+    l->A[pos] = reg;
+    l->nroElem++;
+    return true;
+} /* inserirElemListaOrd */
+
 
 
 
