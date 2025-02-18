@@ -53,7 +53,7 @@ PONT criarNo(int valor) {
 }
 
 // 3) Buscar______________________________________________________________________________________________________________________
-//Buscar um elemento caso a raiz não seja nula. Percorre à direita caso o valor seja menor que a raiz e à esquerda do contrário
+//Buscar um elemento caso a raiz não seja nula. Percorre à direita caso o valor seja maior que a raiz e à esquerda do contrário
 
 PONT buscar(PONT raiz, int valor) {
 
